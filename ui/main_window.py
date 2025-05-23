@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTabWidget
+from PyQt5.QtGui import QIcon
 from ui.tab_basic_tasks import BasicTaskTab
 from ui.tab_merge_av import MergeAudioVideoTab
 from ui.tab_random_concat import RandomConcatTab
@@ -7,8 +8,9 @@ from ui.tab_random_concat import RandomConcatTab
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("FFmpeg Video Processor")
+        self.setWindowTitle("MEDIA HELPER")
         self.resize(500, 500)
+        self.setWindowIcon(QIcon("assets/logo.png"))
         layout = QVBoxLayout(self)
 
         tabs = QTabWidget()
