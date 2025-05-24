@@ -17,7 +17,6 @@ class FFmpegWorker(QThread):
     def run(self):
         start_msg = f"🔄 Starting: {self.preset} → {os.path.basename(self.file_path)}"
         self.progress.emit(start_msg)
-        print(f"🟢 Running worker with preset: {self.preset}, file: {self.file_path}")
 
         if self.preset == "Generate Tracklist":
             txt_list_path = self.file_path

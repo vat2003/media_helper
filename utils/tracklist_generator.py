@@ -14,7 +14,8 @@ def get_duration_in_seconds(filepath):
              '-of', 'default=noprint_wrappers=1:nokey=1', filepath],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
-            text=True
+            text=True,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
         )
         output = result.stdout
         if output is None or output.strip() == "":
@@ -54,4 +55,3 @@ def create_timestamp_tracklist(txt_path, output_path="tracklist.txt", log_callba
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(tracklist))
 
-    log_callback(f"✅ Tracklist đã tạo tại: {output_path}")

@@ -13,7 +13,7 @@ def get_duration(file_path):
         result = subprocess.run([
             'ffprobe', '-v', 'error', '-show_entries',
             'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', file_path
-        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
         return float(result.stdout.strip())
     except:
         return 0
@@ -76,7 +76,7 @@ class RandomConcatWorker(QThread):
             ]
 
             try:
-                subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
                 self.progress.emit(f"✅ Output: {output_path}")
                 create_tracklist(selected, tracklist_path)
                 self.progress.emit(f"📝 Tracklist: {tracklist_path}")
